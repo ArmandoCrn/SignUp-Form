@@ -5,6 +5,8 @@
   --bg-main: #1a1a1a;
   --color-txt: #b9b9b9;
   --main-color: #e6007e;
+  --wrong-input: #ff4c4c;
+  --correct-input: #95ff8d;
 }
 
 /*========
@@ -33,10 +35,6 @@ a {
   text-decoration: none;
 }
 
-label {
-  display: block;
-}
-
 /*============
   TYPOGRAPHY
 ============*/
@@ -49,10 +47,6 @@ body {
 h1,
 .img-credit {
   color: var(--color-header);
-}
-
-.img-credit {
-  text-align: center;
 }
 
 .img-credit a {
@@ -72,17 +66,25 @@ input {
   color: var(--color-txt);
 }
 
-.paragraphs {
-  /*TODO: Da rimuovere al cabio di media query*/
-  text-align: center;
+.asterisk {
+  color: var(--main-color);
 }
 
-/* #asterisk {
-  color: var(--requeired);
-} */
+.bold-txt {
+  font-weight: bold;
+}
 
 .required::after {
   content: " *";
+  color: var(--main-color);
+}
+
+.error {
+  color: var(--wrong-input);
+}
+
+.correct {
+  color: var(--correct-input);
 }
 
 /*==========
@@ -103,17 +105,22 @@ input {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  padding: 1rem;
+}
+
+.img-credit {
+  text-align: center;
+  padding-block: 1rem;
 }
 
 .img-credit p {
   background-color: var(--bg-layover);
-  /*TODO: Se vedi che quando la media query cambia il layout
-  e questo sta al centro con una striscia nera, rendilo inline-block
-  */
+  display: inline-block;
+  padding: 0.4rem;
+  border-radius: 20px;
 }
 
 /*-- MAIN --*/
-
 main {
   /*TODO: Rimuovi il padding nella mediaquery(?)*/
   padding: 0.6rem;
@@ -126,6 +133,69 @@ main {
 
 .paragraphs p + p {
   margin-top: 0.8rem;
+}
+
+/*-- FORM --*/
+form {
+  /* TODO: Occhio al margin in media query */
+  margin-top: 2.4rem;
+  text-align: center;
+}
+
+.paragraphs {
+  /*TODO: Da rimuovere al cabio di media query*/
+  text-align: center;
+}
+
+h3,
+.information {
+  /* TODO: occhio in media */
+  text-align: center;
+}
+
+.information {
+  /* TODO: occhio media */
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+input {
+  opacity: 70%;
+  min-width: 230px;
+  border: 0.5px solid var(--color-txt);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+input:focus {
+  outline: none;
+  /* FIXME: cambierà col javascript in base a se è corretto o meno */
+  border-color: var(--main-color);
+}
+
+.correct-input:focus {
+  outline: none;
+  border-color: var(--correct-input);
+}
+
+.wrong-input:focus {
+  outline: none;
+  border-color: var(--wrong-input);
+}
+
+.input-field {
+  margin-bottom: 1rem;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.error {
+  min-height: 25px;
 }
 /*==============
   MEDIA QUERIES
