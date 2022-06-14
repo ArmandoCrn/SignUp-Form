@@ -5,15 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign-Up Form</title>
-    <!--TODO: Metti un icona-->
-    <link rel="icon" href="" />
+    <!-- ICON -->
+    <link rel="icon" href="./img/icona.png" />
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <!-- JavaScript -->
     <script src="script.js" defer></script>
 
     <!-- FONT -->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <!-- ICONS - FONTAWESOME -->
     <script
       src="https://kit.fontawesome.com/faff2b4ada.js"
@@ -22,15 +27,88 @@
   </head>
 
   <body>
-    <!-- icona del sito: <i class="fa-brands fa-wpexplorer"></i> -->
+    <section class="header">
+      <div class="logo">
+        <i class="fa-brands fa-wpexplorer"></i>
+        <h1>Lorem</h1>
+      </div>
 
-    <!-- <footer class="footer">
+      <div class="img-credit">
+        <p>Photo by <a href="https://unsplash.com/@kazuo513">Kazuo ota</a>.</p>
+      </div>
+    </section>
+
+    <main>
+      <section>
+        <p>This is <strong>not</strong> a real online service!</p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo excepturi
+          commodi doloribus ducimus nobis odio natus eius quas itaque!
+        </p>
+        <p>Sign up <em>now</em> to get started</p>
+      </section>
+
+      <form action="#" method="post">
+        <h3>Join or Create an account!</h3>
+        <p class="information-psw">
+          Field marked with an asterisk (<span class="asterisk">*</span>) are required
+        </p>
+
+        <!-- FIRST NAME -->
+        <div>
+          <label for="first-name" class="required">First Name</label>
+          <input type="text" id="first-name" name="first-name" required />
+          <p class="error name-error">Please complete this field</p>
+        </div>
+
+        <!-- LAST NAME -->
+        <div>
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" />
+          <p class="error"></p>
+        </div>
+
+        <!-- EMAIL -->
+        <div>
+          <label for="email" class="required">Email</label>
+          <input type="email" id="email" name="email" required />
+          <p class="error email-error">Please enter a valid email address</p>
+        </div>
+
+        <!-- PHONE -->
+        <div>
+          <label for="phone-number">Phone Number</label>
+          <input type="tel" id="phone-number" name="phone-number" />
+          <p class="error"></p>
+        </div>
+
+        <!-- PASSWORD -->
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+          <p class="error"></p>
+        </div>
+
+        <!-- CONFIRM PASSWORD TODO: NON BISOGNA INVIARLO-->
+        <div>
+          <label for="conf-password">Confirm Password</label>
+          <input type="password" id="conf-password" name="conf-password" />
+          <p class="error"></p>
+        </div>
+
+        <button id="submit" type="submit">Create Account</button>
+      </form>
+
+      <p>Already have an account? <a href="#">Log in</a></p>
+    </main>
+
+    <footer class="footer">
       <p>
         Copyright &copy; 2022 ArmandoCrn
         <a href="https://github.com/ArmandoCrn" id="logo">
           <i class="fa-brands fa-github"></i>
         </a>
       </p>
-    </footer> -->
+    </footer>
   </body>
 </html>
