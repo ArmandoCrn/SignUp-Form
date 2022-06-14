@@ -2,8 +2,9 @@
   --color-header: #eee;
   --color-link-header: #e2e2e2;
   --bg-layover: #0000006e;
-  --main-color: #e6007e;
   --bg-main: #1a1a1a;
+  --color-txt: #b9b9b9;
+  --main-color: #e6007e;
 }
 
 /*========
@@ -20,6 +21,11 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+}
+
+body,
+input {
+  background-color: var(--bg-main);
 }
 
 a {
@@ -39,6 +45,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/*-- HEADER --*/
 h1,
 .img-credit {
   color: var(--color-header);
@@ -58,6 +65,18 @@ h1,
   font-size: 4rem;
 }
 
+/*-- MAIN --*/
+main,
+footer,
+input {
+  color: var(--color-txt);
+}
+
+.paragraphs {
+  /*TODO: Da rimuovere al cabio di media query*/
+  text-align: center;
+}
+
 /* #asterisk {
   color: var(--requeired);
 } */
@@ -69,8 +88,8 @@ h1,
 /*==========
   SPECIFIC
 ==========*/
-/*-- Header --*/
 
+/*-- HEADER --*/
 .img-bg {
   background-image: url("./img/background.jpg");
   background-position: center;
@@ -91,6 +110,22 @@ h1,
   /*TODO: Se vedi che quando la media query cambia il layout
   e questo sta al centro con una striscia nera, rendilo inline-block
   */
+}
+
+/*-- MAIN --*/
+
+main {
+  /*TODO: Rimuovi il padding nella mediaquery(?)*/
+  padding: 0.6rem;
+}
+
+.paragraphs {
+  /* TODO: occhio al margin top nella media query */
+  margin-top: 1rem;
+}
+
+.paragraphs p + p {
+  margin-top: 0.8rem;
 }
 /*==============
   MEDIA QUERIES
