@@ -1,0 +1,41 @@
+:root {
+  --white: #eee;
+}
+
+/*========
+  GLOBAL
+========*/
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/*============
+  TYPOGRAPHY
+============*/
+
+body {
+  font-family: "TODO: metti un font carino";
+}
+
+/*==========
+  SPECIFIC
+==========*/
+
+/*==============
+  MEDIA QUERIES
+==============*/
