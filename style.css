@@ -1,6 +1,5 @@
 :root {
   --color-header: #eee;
-  --color-link-header: #e2e2e2;
   --bg-layover: #0000006e;
   --bg-main: #1a1a1a;
   --color-txt: #b9b9b9;
@@ -31,7 +30,9 @@ input {
 }
 
 a {
-  color: inherit;
+  color: var(--main-color);
+  font-weight: bold;
+
   text-decoration: none;
 }
 
@@ -49,11 +50,6 @@ h1,
   color: var(--color-header);
 }
 
-.img-credit a {
-  color: var(--color-link-header);
-  font-weight: bold;
-}
-
 .fa-wpexplorer {
   color: var(--main-color);
   font-size: 4rem;
@@ -64,6 +60,10 @@ main,
 footer,
 input {
   color: var(--color-txt);
+}
+
+input {
+  font-size: 1rem;
 }
 
 .asterisk {
@@ -85,6 +85,13 @@ input {
 
 .correct {
   color: var(--correct-input);
+}
+
+#submit {
+  color: var(--main-color);
+  font-size: 1.2rem;
+  font-family: inherit;
+  font-weight: bold;
 }
 
 /*==========
@@ -116,7 +123,7 @@ input {
 .img-credit p {
   background-color: var(--bg-layover);
   display: inline-block;
-  padding: 0.4rem;
+  padding: 0.6rem;
   border-radius: 20px;
 }
 
@@ -124,6 +131,7 @@ input {
 main {
   /*TODO: Rimuovi il padding nella mediaquery(?)*/
   padding: 0.6rem;
+  text-align: center;
 }
 
 .paragraphs {
@@ -139,18 +147,6 @@ main {
 form {
   /* TODO: Occhio al margin in media query */
   margin-top: 2.4rem;
-  text-align: center;
-}
-
-.paragraphs {
-  /*TODO: Da rimuovere al cabio di media query*/
-  text-align: center;
-}
-
-h3,
-.information {
-  /* TODO: occhio in media */
-  text-align: center;
 }
 
 .information {
@@ -197,6 +193,35 @@ input:focus {
 .error {
   min-height: 25px;
 }
+
+#submit {
+  cursor: pointer;
+  background-color: inherit;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid var(--main-color);
+  border-radius: 8px;
+  margin-bottom: 1.4rem;
+}
+
+#submit:hover,
+#submit:focus {
+  background-color: var(--main-color);
+  color: var(--bg-main);
+}
+
+#submit:focus {
+  outline: none;
+}
+
+/*-- FOOTER --*/
+/* footer {
+  margin auto ?
+  flexbox?
+  cosa dovrà succedere?
+  Vedi quando inizia a mettere le mediaquery
+} */
+
 /*==============
   MEDIA QUERIES
 ==============*/
+/*una media a 650+ px (?)*/
