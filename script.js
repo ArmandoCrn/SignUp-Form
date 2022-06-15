@@ -50,18 +50,52 @@ const errorConfPass = document.querySelector(".conf-pass-error");
 form.addEventListener("submit", (e) => console.log("non so")); //non credo serva
 submitBtn.addEventListener("click", btnChecker);
 
-// name.addEventListener("input", );
+name.addEventListener("keyup", delay(validateName, 300));
+email.addEventListener("keyup", delay(validateEmail, 300));
+pass.addEventListener("keyup", delay(validatePass, 300));
+passConf.addEventListener("keyup", delay(validateConfPass, 300));
 
-// FUNCTIONs
+// FUNCTIONS
+function delay(callback, ms) {
+  let timer = 0;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(callback, ms);
+  };
+}
 
-/*
-    Creare un add event listener per ogni singolo input type input
-    setTime dopo qualche secondo 0.3/0.5s
-    e SE ha la classe empty-imput RIMUOVILA 
-    e ovviamente rimuovi il contenuto dell'error, almeno per quanto riguardo
-    l'essere un input vuoto
-    Cerca di automatizzare anche questo, visto che c'è un botto di codice da ripetere
-  */
+function validateName() {
+  inputFull(name);
+}
+
+function validateEmail() {
+  inputFull(email);
+  //FIXME: cerca online validation email
+  //Bisogna fscrivere a manina una regexp per la @ ecc ecc
+  //errore dirà "Please enter a valid email address"
+}
+
+function validatePass() {
+  inputFull(pass);
+  //FIXME: cerca online validation pass
+}
+
+function validateConfPass() {
+  inputFull(passConf);
+  /*
+  FIXME: if (text di questo field !== a testo di pass) {
+    scrive cosa succede qui
+  }
+*/
+}
+
+function inputFull(input) {
+  if (input.className) {
+    input.classList.remove("empty-imput");
+    let error = errorType(input);
+    error.innerText = "";
+  }
+}
 
 function btnChecker(e) {
   e.preventDefault();
@@ -79,29 +113,35 @@ function btnChecker(e) {
 }
 
 function checkEmpty(input) {
-  let content = input.value;
-  let error;
+  let error = errorType(input);
 
-  switch (input) {
-    case name:
-      error = errorName;
-      break;
-
-    case email:
-      error = errorEmail;
-      break;
-
-    case pass:
-      error = errorPass;
-      break;
-
-    case passConf:
-      error = errorConfPass;
-      break;
-  }
-
-  if (content === "") {
+  if (input.value === "") {
     error.innerText = "Please complete this field";
     input.classList.add("empty-imput");
   }
+}
+
+// Capisce che classe deve usare per modificare l'innerText
+function errorType(input) {
+  let result;
+
+  switch (input) {
+    case name:
+      result = errorName;
+      break;
+
+    case email:
+      result = errorEmail;
+      break;
+
+    case pass:
+      result = errorPass;
+      break;
+
+    case passConf:
+      result = errorConfPass;
+      break;
+  }
+
+  return result;
 }
