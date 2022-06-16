@@ -73,7 +73,7 @@
         <!-- EMAIL -->
         <div class="input-field">
           <label for="email" class="required">Email</label>
-          <input type="email" id="email" name="email" minlength="5" required />
+          <input type="email" id="email" name="email" data-state="" required />
           <div class="error email-error"></div>
         </div>
 
@@ -88,6 +88,12 @@
         <div class="input-field">
           <label for="password" class="required">Password</label>
           <input type="password" id="password" name="password" minlength="8" required />
+          <!-- <i class="fa-solid fa-eye"></i> -->
+          <!--
+            TODO: per l'icona, prova a metterla come #password::after {content=""}
+            nel css così dovrebbe prendere come riferimento l'input relative
+            se rendiamo l'after absolute, almeno credo.
+          -->
           <div class="error pass-error"></div>
         </div>
 
@@ -101,6 +107,7 @@
             minlength="8"
             required
           />
+          <!-- <i class="fa-solid fa-eye"></i> -->
           <div class="error conf-pass-error"></div>
         </div>
 

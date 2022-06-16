@@ -63,7 +63,7 @@ input {
 }
 
 input {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .asterisk {
@@ -174,16 +174,12 @@ input:focus {
   border-color: var(--main-color);
 }
 
-.empty-imput {
+.wrong-input {
   border-color: var(--wrong-input);
 }
 
 .correct-input:focus {
   border-color: var(--correct-input);
-}
-
-.wrong-input:focus {
-  border-color: var(--wrong-input);
 }
 
 .input-field {
@@ -195,6 +191,21 @@ input:focus {
 .error {
   min-height: 25px;
 }
+
+/*-- Show Password --*/
+/*FIXME: aggiustalo quando metti le quary e quindi verso la fine
+altrimenti è probabile che dovrò cambiarlo troppe volte*/
+/*
+#password,
+#conf-password {
+  position: relative;
+} 
+
+.fa-eye {
+  position: absolute; 
+  display: none;
+}
+*/
 
 #submit {
   cursor: pointer;

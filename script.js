@@ -1,16 +1,6 @@
 /*
-Cosa scrivere quando si valida il form
-Se premiamo il pulstante send e il campo è vuoto bisogna mostrare:
-"Please complete this field"
 
-
-altrimenti passiamo alla validazione mentre scriviamo, sempre col timer
-dopo tipo 0.3/0.5 secondi che sia finito l'event input
-se ci sono cose sbagliate nell'email, password e confirm pass
-faremo comparire sotto ciò che è sbagliato:
-i p saranne tutte rosse, avendo già in automatico la classe error
-
-EMAIL: "Please enter a valid email address (min 6 caratteri)"; 
+EMAIL: "Please enter a valid email address"; 
 
 CONFIRM PASS: "Password mismatch"
 
@@ -29,10 +19,24 @@ la classe .correct-input oppure .wrong-input
 
 MI SA CHE L'ENTER NON DEVO METTERLO IO, C'è GIà IN AUTOMATICO.
 */
+/*
+per automatizzare la validazione di EMAIL PASS e CONFIRM PASS
+
+il bordo diventa rosso quando è sbagliato intutti e 3
+
+in EMAIL e conf pass compare sotto solo una stringa
+
+in EMAIL la stringa sarà
+"Please enter a valid email address"; 
+
+in CONFIRM PASS la stringa sarà
+"Password mismatch"
+*/
 
 // COMPONENTS
 const form = document.querySelector("form"); // Non so se serve
 const submitBtn = document.querySelector("#submit");
+const needSign = document.querySelectorAll(".need-sign");
 
 const name = document.querySelector("#first-name");
 const errorName = document.querySelector(".name-error");
@@ -47,15 +51,21 @@ const passConf = document.querySelector("#conf-password");
 const errorConfPass = document.querySelector(".conf-pass-error");
 
 // EVENTS
-form.addEventListener("submit", (e) => console.log("non so")); //non credo serva
+form.addEventListener("submit", () => console.log("Done")); //non credo serva
 submitBtn.addEventListener("click", btnChecker);
 
 name.addEventListener("keyup", delay(validateName, 300));
 email.addEventListener("keyup", delay(validateEmail, 300));
+email.addEventListener("focus", () => okSign(email, errorEmail));
+email.addEventListener("blur", () => removeOkSign(email, errorEmail));
+
 pass.addEventListener("keyup", delay(validatePass, 300));
 passConf.addEventListener("keyup", delay(validateConfPass, 300));
 
 // FUNCTIONS
+
+//Funzione DELAY presa da stackoverflow:
+//(https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing)
 function delay(callback, ms) {
   let timer = 0;
   return function () {
@@ -65,45 +75,50 @@ function delay(callback, ms) {
 }
 
 function validateName() {
-  inputFull(name);
+  inputFull(name, errorName);
 }
 
 function validateEmail() {
-  inputFull(email);
-  //FIXME: cerca online validation email
-  //Bisogna fscrivere a manina una regexp per la @ ecc ecc
-  //errore dirà "Please enter a valid email address"
+  inputFull(email, errorEmail);
+  const regexpEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value);
+
+  if (!regexpEmail) {
+    wrongValidation(email, errorEmail);
+  } else {
+    correctValidation(email, errorEmail);
+  }
+}
+
+function showPass() {
+  //TODO: una delle ultime cose da fare, poicè dovrà essere
+  //pronto già il design finale
+  //usa toggle per cambiare l'attributo type da pass a text
+  // Automatizzalo per farlo funzionare sia per questo field,
+  // che per conf pass, anzichè scrivere due volte la stessa roba
 }
 
 function validatePass() {
-  inputFull(pass);
+  inputFull(pass, errorPass);
   //FIXME: cerca online validation pass
 }
 
 function validateConfPass() {
-  inputFull(passConf);
+  inputFull(passConf, errorConfPass);
   /*
+  TODO: FAI prima questo che dovrebbe essere più semplice
   FIXME: if (text di questo field !== a testo di pass) {
     scrive cosa succede qui
   }
 */
 }
 
-function inputFull(input) {
-  if (input.className) {
-    input.classList.remove("empty-imput");
-    let error = errorType(input);
-    error.innerText = "";
-  }
-}
-
 function btnChecker(e) {
   e.preventDefault();
 
-  checkEmpty(name);
-  checkEmpty(email);
-  checkEmpty(pass);
-  checkEmpty(passConf);
+  checkEmpty(name, errorName);
+  checkEmpty(email, errorEmail);
+  checkEmpty(pass, errorPass);
+  checkEmpty(passConf, errorConfPass);
 
   /*
   Altre cose da fare??
@@ -112,36 +127,61 @@ function btnChecker(e) {
   */
 }
 
-function checkEmpty(input) {
-  let error = errorType(input);
+function wrongValidation(input, error) {
+  const dataset = input.dataset.state;
+  let message;
 
-  if (input.value === "") {
-    error.innerText = "Please complete this field";
-    input.classList.add("empty-imput");
+  // Remove datalist "correct"
+  if (dataset !== "") {
+    input.dataset.state = "";
+  }
+
+  if (input === email) {
+    message = "Please enter a valid email address";
+  }
+
+  input.classList.remove("correct-input");
+  input.classList.add("wrong-input");
+  error.classList.remove("correct");
+  error.innerText = message;
+}
+
+function correctValidation(input, error) {
+  const dataset = input.dataset.state;
+
+  if (dataset === "") {
+    input.dataset.state = "correct";
+    okSign(input, error);
+  }
+
+  input.classList.remove("wrong-input");
+  input.classList.add("correct-input");
+}
+
+function inputFull(input, error) {
+  if (input.className) {
+    input.classList.remove("wrong-input");
+    error.innerText = "";
   }
 }
 
-// Capisce che classe deve usare per modificare l'innerText
-function errorType(input) {
-  let result;
-
-  switch (input) {
-    case name:
-      result = errorName;
-      break;
-
-    case email:
-      result = errorEmail;
-      break;
-
-    case pass:
-      result = errorPass;
-      break;
-
-    case passConf:
-      result = errorConfPass;
-      break;
+function checkEmpty(input, error) {
+  if (input.value === "") {
+    error.innerText = "Please complete this field";
+    input.classList.add("wrong-input");
   }
+}
 
-  return result;
+function okSign(input, error) {
+  if (input.dataset.state === "correct") {
+    error.classList.add("correct");
+    error.innerText = "✓";
+  }
+}
+
+function removeOkSign(input, error) {
+  if (input.dataset.state === "correct") {
+    error.classList.remove("correct");
+    error.innerText = "";
+  }
 }
