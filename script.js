@@ -36,7 +36,6 @@ in CONFIRM PASS la stringa sarà
 // COMPONENTS
 const form = document.querySelector("form"); // Non so se serve
 const submitBtn = document.querySelector("#submit");
-const needSign = document.querySelectorAll(".need-sign");
 
 const name = document.querySelector("#first-name");
 const errorName = document.querySelector(".name-error");
@@ -55,12 +54,24 @@ form.addEventListener("submit", () => console.log("Done")); //non credo serva
 submitBtn.addEventListener("click", btnChecker);
 
 name.addEventListener("keyup", delay(validateName, 300));
+
 email.addEventListener("keyup", delay(validateEmail, 300));
-email.addEventListener("focus", () => okSign(email, errorEmail));
-email.addEventListener("blur", () => removeOkSign(email, errorEmail));
+email.addEventListener("focus", () => {
+  if (email.value !== "") {
+    validateEmail;
+  }
+});
+email.addEventListener("blur", () => removeOkSign(errorEmail));
 
 pass.addEventListener("keyup", delay(validatePass, 300));
+
 passConf.addEventListener("keyup", delay(validateConfPass, 300));
+passConf.addEventListener("focus", () => {
+  if (email.value !== "") {
+    validateConfPass;
+  }
+});
+passConf.addEventListener("blur", () => removeOkSign(errorPassConf));
 
 // FUNCTIONS
 
@@ -99,13 +110,23 @@ function showPass() {
   //usa toggle per cambiare l'attributo type da pass a text
   // Automatizzalo per farlo funzionare sia per questo field,
   // che per conf pass, anzichè scrivere due volte la stessa roba
-  //OCCHIO CHE quando scrivi, deve anche controllare il confirm pass e farlo diventare wrong,
-  //quindi metti un if(confirmpass.value !== "") {    wrongValidation(passConf, errorPassConf);}
 }
 
 function validatePass() {
   inputFull(pass, errorPass);
   //FIXME: cerca online validation pass
+  /*
+  OCCHIO CHE quando scrivi, deve anche controllare il confirm pass e farlo diventare wrong,
+  
+  // Cambia dinamicamente anche il Conf Pass
+  if(confirmpass.value !== "") {
+    if (passConf.value !== pass.value) {
+    wrongValidation(passConf, errorPassConf);
+  } else {
+    correctValidation(passConf, errorPassConf);
+  }
+}
+    */
 }
 
 function validateConfPass() {
@@ -118,13 +139,6 @@ function validateConfPass() {
   if (pass.value !== "" && passConf.value === pass.value) {
     correctValidation(passConf, errorPassConf);
   }
-
-  /*
-  TODO: FAI prima questo che dovrebbe essere più semplice
-  FIXME: if (text di questo field !== a testo di pass) {
-    scrive cosa succede qui
-  }
-*/
 }
 
 function btnChecker(e) {
@@ -143,13 +157,7 @@ function btnChecker(e) {
 }
 
 function wrongValidation(input, error) {
-  const dataset = input.dataset.state;
   let message = changeErrorMessage(input);
-
-  // Remove datalist "correct"
-  if (dataset !== "") {
-    input.dataset.state = "";
-  }
 
   input.classList.remove("correct-input");
   input.classList.add("wrong-input");
@@ -158,14 +166,12 @@ function wrongValidation(input, error) {
 }
 
 function changeErrorMessage(input) {
-  let message;
+  let message = "Please complete this field";
 
   switch (input) {
     case email:
       if (email.value !== "") {
         message = "Please enter a valid email address";
-      } else {
-        message = "Please complete this field";
       }
       break;
 
@@ -176,8 +182,6 @@ function changeErrorMessage(input) {
     case passConf:
       if (passConf.value !== "") {
         message = "Password mismatch";
-      } else {
-        message = "Please complete this field";
       }
       break;
   }
@@ -186,15 +190,10 @@ function changeErrorMessage(input) {
 }
 
 function correctValidation(input, error) {
-  const dataset = input.dataset.state;
-
-  if (dataset === "") {
-    input.dataset.state = "correct";
-    okSign(input, error);
-  }
-
   input.classList.remove("wrong-input");
   input.classList.add("correct-input");
+  error.classList.add("correct");
+  error.innerText = "✓";
 }
 
 function inputFull(input, error) {
@@ -211,16 +210,9 @@ function checkEmpty(input, error) {
   }
 }
 
-function okSign(input, error) {
-  if (input.dataset.state === "correct") {
-    error.classList.add("correct");
-    error.innerText = "✓";
-  }
-}
-
-function removeOkSign(input, error) {
-  if (input.dataset.state === "correct") {
-    error.classList.remove("correct");
+function removeOkSign(error) {
+  error.classList.remove("correct");
+  if (error.innerText === "✓") {
     error.innerText = "";
   }
 }
