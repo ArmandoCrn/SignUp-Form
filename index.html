@@ -60,7 +60,7 @@
         <div class="input-field">
           <label for="first-name" class="required">First Name</label>
           <input type="text" id="first-name" name="first-name" required />
-          <div class="error name-error"></div>
+          <div class="error" id="name-error"></div>
         </div>
 
         <!-- LAST NAME -->
@@ -74,7 +74,7 @@
         <div class="input-field">
           <label for="email" class="required">Email</label>
           <input type="email" id="email" name="email" required />
-          <div class="error email-error"></div>
+          <div class="error" id="email-error"></div>
         </div>
 
         <!-- PHONE -->
@@ -94,7 +94,13 @@
             nel css così dovrebbe prendere come riferimento l'input relative
             se rendiamo l'after absolute, almeno credo.
           -->
-          <div class="error pass-error"></div>
+          <div class="error min-height" id="pass-error"></div>
+          <div class="pass-condition" id="d-none">
+            <p><span class="span-length"></span> Minimum 8 characters</p>
+            <p><span class="span-lowercase"></span> 1 lowercase character</p>
+            <p><span class="span-uppercase"></span> 1 uppercase character</p>
+            <p><span class="span-number"></span> 1 numeric character</p>
+          </div>
         </div>
 
         <!-- CONFIRM PASSWORD TODO: NON BISOGNA INVIARLO-->
@@ -108,7 +114,7 @@
             required
           />
           <!-- <i class="fa-solid fa-eye"></i> -->
-          <div class="error conf-pass-error"></div>
+          <div class="error" id="conf-pass-error"></div>
         </div>
 
         <button id="submit" type="submit">Create Account</button>

@@ -87,6 +87,11 @@ input {
   color: var(--correct-input);
 }
 
+.pass-condition {
+  font-size: 0.8rem;
+  text-align: left;
+}
+
 #submit {
   color: var(--main-color);
   font-size: 1.2rem;
@@ -190,6 +195,22 @@ input:focus {
 
 .error {
   min-height: 25px;
+}
+
+#pass-error.error {
+  min-height: auto;
+}
+
+#pass-error.min-height {
+  min-height: 25px;
+}
+
+#d-none {
+  display: none;
+}
+
+.pass-condition {
+  display: inline-block;
 }
 
 /*-- Show Password --*/
