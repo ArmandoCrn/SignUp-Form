@@ -48,7 +48,7 @@ const pass = document.querySelector("#password");
 const errorPass = document.querySelector(".pass-error");
 
 const passConf = document.querySelector("#conf-password");
-const errorConfPass = document.querySelector(".conf-pass-error");
+const errorPassConf = document.querySelector(".conf-pass-error");
 
 // EVENTS
 form.addEventListener("submit", () => console.log("Done")); //non credo serva
@@ -75,7 +75,11 @@ function delay(callback, ms) {
 }
 
 function validateName() {
-  inputFull(name, errorName);
+  if (name.value === "") {
+    checkEmpty(name, errorName);
+  } else {
+    inputFull(name, errorName);
+  }
 }
 
 function validateEmail() {
@@ -95,6 +99,8 @@ function showPass() {
   //usa toggle per cambiare l'attributo type da pass a text
   // Automatizzalo per farlo funzionare sia per questo field,
   // che per conf pass, anzichè scrivere due volte la stessa roba
+  //OCCHIO CHE quando scrivi, deve anche controllare il confirm pass e farlo diventare wrong,
+  //quindi metti un if(confirmpass.value !== "") {    wrongValidation(passConf, errorPassConf);}
 }
 
 function validatePass() {
@@ -103,7 +109,16 @@ function validatePass() {
 }
 
 function validateConfPass() {
-  inputFull(passConf, errorConfPass);
+  inputFull(passConf, errorPassConf);
+
+  if (passConf.value === "" || passConf.value !== pass.value) {
+    wrongValidation(passConf, errorPassConf);
+  }
+
+  if (pass.value !== "" && passConf.value === pass.value) {
+    correctValidation(passConf, errorPassConf);
+  }
+
   /*
   TODO: FAI prima questo che dovrebbe essere più semplice
   FIXME: if (text di questo field !== a testo di pass) {
@@ -118,7 +133,7 @@ function btnChecker(e) {
   checkEmpty(name, errorName);
   checkEmpty(email, errorEmail);
   checkEmpty(pass, errorPass);
-  checkEmpty(passConf, errorConfPass);
+  checkEmpty(passConf, errorPassConf);
 
   /*
   Altre cose da fare??
@@ -129,21 +144,45 @@ function btnChecker(e) {
 
 function wrongValidation(input, error) {
   const dataset = input.dataset.state;
-  let message;
+  let message = changeErrorMessage(input);
 
   // Remove datalist "correct"
   if (dataset !== "") {
     input.dataset.state = "";
   }
 
-  if (input === email) {
-    message = "Please enter a valid email address";
-  }
-
   input.classList.remove("correct-input");
   input.classList.add("wrong-input");
   error.classList.remove("correct");
   error.innerText = message;
+}
+
+function changeErrorMessage(input) {
+  let message;
+
+  switch (input) {
+    case email:
+      if (email.value !== "") {
+        message = "Please enter a valid email address";
+      } else {
+        message = "Please complete this field";
+      }
+      break;
+
+    case pass:
+      "sdf";
+      break;
+
+    case passConf:
+      if (passConf.value !== "") {
+        message = "Password mismatch";
+      } else {
+        message = "Please complete this field";
+      }
+      break;
+  }
+
+  return message;
 }
 
 function correctValidation(input, error) {

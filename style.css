@@ -213,6 +213,7 @@ altrimenti è probabile che dovrò cambiarlo troppe volte*/
   padding: 0.7rem 1.8rem;
   border: 1px solid var(--main-color);
   border-radius: 8px;
+  margin-top: 0.8rem;
   margin-bottom: 1.4rem;
 }
 
