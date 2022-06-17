@@ -1,10 +1,4 @@
 /*
-PASSWORD:
-Per la pass il discorso è diverso. Dovremo creare 3 p dove all'interno ci 
-saranno rispettivamente
-✖Minimum 8 characters
-At least one number
-At least one character
 
 MI SA CHE L'ENTER NON DEVO METTERLO IO, C'è GIà IN AUTOMATICO.
 
@@ -99,8 +93,10 @@ function validatePass() {
 
   if (!regexpPass) {
     wrongValidation(pass, errorPass);
+    checkPass();
   } else {
     correctValidation(pass, errorPass);
+    checkPass();
   }
 
   if (passConf.value !== "") {
@@ -220,12 +216,46 @@ function passBlurEvent() {
   removeOkSign(errorPass);
 }
 
-function checkPass(span, status) {
+function checkPass() {
+  const passValue = pass.value;
   const lengthSpan = document.querySelector(".span-length");
   const lowerSpan = document.querySelector(".span-lowercase");
   const upperSpan = document.querySelector(".span-uppercase");
   const numberSpan = document.querySelector(".span-number");
 
-  if (pass.length >= 8) {
+  if (passValue.length >= 8) {
+    positiveCheck(lengthSpan);
+  } else {
+    negativeCheck(lengthSpan);
   }
+
+  if (passValue.match(/[a-z]/)) {
+    positiveCheck(lowerSpan);
+  } else {
+    negativeCheck(lowerSpan);
+  }
+
+  if (passValue.match(/[A-Z]/)) {
+    positiveCheck(upperSpan);
+  } else {
+    negativeCheck(upperSpan);
+  }
+
+  if (passValue.match(/[0-9]/)) {
+    positiveCheck(numberSpan);
+  } else {
+    negativeCheck(numberSpan);
+  }
+}
+
+function positiveCheck(span) {
+  span.innerText = "✓";
+  span.classList.remove("error");
+  span.classList.add("correct");
+}
+
+function negativeCheck(span) {
+  span.innerText = "🗴";
+  span.classList.add("error");
+  span.classList.remove("correct");
 }
