@@ -38,26 +38,26 @@
       </div>
     </section>
 
-    <div class="rigth-section">
-      <main>
-        <section class="paragraphs padding-x">
-          <p>This is <strong>not</strong> a real online service!</p>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo excepturi
-            commodi doloribus ducimus nobis odio natus eius quas itaque!
-          </p>
-          <p>Sign up <em>now</em> to get started</p>
-        </section>
+    <main class="rigth-section">
+      <section class="paragraphs padding-x">
+        <p>This is <strong>not</strong> a real online service!</p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo excepturi
+          commodi doloribus ducimus nobis odio natus eius quas itaque!
+        </p>
+        <p>Sign up <em>now</em> to get started</p>
+      </section>
 
-        <!-- FORM -->
-        <form action="#" method="post" class="padding-x">
-          <h3>Join or Create an account!</h3>
-          <p class="information">
-            Field marked with an asterisk (<span class="asterisk">*</span>) are
-            <span class="bold-txt">required</span>.
-          </p>
+      <!-- FORM -->
+      <form action="#" class="padding-x">
+        <h3>Join or Create an account!</h3>
+        <p class="information">
+          Field marked with an asterisk (<span class="asterisk">*</span>) are
+          <span class="bold-txt">required</span>.
+        </p>
 
-          <div class="all-inputs">
+        <div class="all-inputs">
+          <div class="row">
             <!-- FIRST NAME -->
             <div class="input-field">
               <label for="first-name" class="required">First Name</label>
@@ -71,7 +71,9 @@
               <input type="text" id="last-name" name="last-name" />
               <div class="error"></div>
             </div>
+          </div>
 
+          <div class="row">
             <!-- EMAIL -->
             <div class="input-field">
               <label for="email" class="required">Email</label>
@@ -85,7 +87,9 @@
               <input type="tel" id="phone-number" name="phone-number" />
               <div class="error"></div>
             </div>
+          </div>
 
+          <div class="row">
             <!-- PASSWORD -->
             <div class="input-field">
               <label for="password" class="required">Password</label>
@@ -109,7 +113,6 @@
               </div>
             </div>
 
-            <!-- CONFIRM PASSWORD TODO: NON BISOGNA INVIARLO-->
             <div class="input-field">
               <label for="conf-password" class="required">Confirm Password</label>
               <div class="show-pass">
@@ -125,12 +128,12 @@
               <div class="error" id="conf-pass-error"></div>
             </div>
           </div>
+        </div>
 
-          <button id="submit" type="submit">Create Account</button>
-        </form>
+        <button id="submit" type="submit">Create Account</button>
+      </form>
 
-        <p class="log-in">Already have an account? <a href="#">Log in</a></p>
-      </main>
+      <p class="log-in">Already have an account? <a href="#">Log in</a></p>
 
       <footer>
         <p>
@@ -140,6 +143,6 @@
           </a>
         </p>
       </footer>
-    </div>
+    </main>
   </body>
 </html>

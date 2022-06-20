@@ -181,10 +181,6 @@ main {
 }
 
 /*-- FORM --*/
-form {
-  margin-top: 1.2rem;
-}
-
 .information {
   margin-top: 0.4rem;
   margin-bottom: 2rem;
@@ -253,20 +249,6 @@ input:focus {
   right: 5px;
 }
 
-/*FIXME: aggiustalo quando metti le quary e quindi verso la fine
-altrimenti è probabile che dovrò cambiarlo troppe volte*/
-/*
-#password,
-#conf-password {
-  position: relative;
-} 
-
-.fa-eye {
-  position: absolute; 
-  display: none;
-}
-*/
-
 #submit {
   cursor: pointer;
   background-color: inherit;
@@ -302,19 +284,10 @@ footer {
   vertical-align: middle;
 }
 
-/*FIXME: METTI ANIMAZIONI AL LOGO*/
-
-/* footer {
-  TODO: occhio che deve stare sempre attaccato al basso, quindi occhio all'altezza
-  
-  margin auto ?
-  flexbox?
-  cosa dovrà succedere?
-  Vedi quando inizia a mettere le mediaquery
-
-  forse sarebbe carino mettere uno sfondo grigino,
-  insieme alla parte dove stanno i 3 paragrafi
-} */
+.fa-github:hover {
+  transition: all 3ms ease-in-out;
+  transform: scale(1.2) translateY(-5px);
+}
 
 /*==============
   MEDIA QUERIES
@@ -366,14 +339,19 @@ footer {
   }
 }
 
-@media screen and (min-width: 582px) {
-  .all-inputs {
+@media screen and (min-width: 570px) {
+  .rigth-section {
+    min-height: calc(100vh - 185.38px);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .row {
+    display: flex;
     justify-content: center;
   }
 
-  .all-inputs > div:nth-child(even) {
+  .row > div:nth-child(even) {
     margin-left: 2rem;
   }
 
@@ -381,7 +359,57 @@ footer {
     min-width: 265px;
     font-size: 1.1rem;
   }
+
+  footer {
+    margin-top: auto;
+  }
 }
 
-@media screen and (min-width: 842px) {
+@media screen and (min-width: 960px) {
+  body {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .img-bg {
+    min-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .rigth-section {
+    min-width: calc(100% - 40%);
+  }
+
+  .paragraphs {
+    margin-bottom: auto;
+    padding: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 1324px) {
+  .logo > * {
+    font-size: 5rem;
+  }
+
+  form > h3 {
+    font-size: 2.6rem;
+  }
+
+  .img-bg {
+    min-width: 45%;
+  }
+
+  .rigth-section {
+    min-width: calc(100% - 45%);
+  }
+
+  input {
+    min-width: 330px;
+  }
+
+  .row > div:nth-child(even) {
+    margin-left: 3rem;
+  }
 }

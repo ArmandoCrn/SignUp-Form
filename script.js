@@ -1,11 +1,3 @@
-/*
-
-MI SA CHE L'ENTER NON DEVO METTERLO IO, C'è GIà IN AUTOMATICO.
-
-FIXME: fai un check per vedere se tutto funziona anche con schermo grande
-prova anche diversi modi per rompere il tutto
-*/
-
 // COMPONENTS
 const form = document.querySelector("form"); // Non so se serve
 const submitBtn = document.querySelector("#submit");
@@ -20,7 +12,6 @@ const pass = document.querySelector("#password");
 const errorPass = document.querySelector("#pass-error");
 const passDisplay = document.querySelector(".pass-condition");
 const showPassEye = document.querySelector("#first-eye");
-const passDivContainer = document.querySelector(".show-pass");
 
 const passConf = document.querySelector("#conf-password");
 const errorPassConf = document.querySelector("#conf-pass-error");
@@ -31,6 +22,12 @@ form.addEventListener("submit", () => console.log("Done")); //non credo serva
 submitBtn.addEventListener("click", btnChecker);
 
 name.addEventListener("keyup", delay(validateName, 300));
+name.addEventListener("focus", () => {
+  if (name.value !== "") {
+    validateName();
+  }
+});
+name.addEventListener("blur", () => removeOkSign(errorName));
 
 email.addEventListener("keyup", delay(validateEmail, 300));
 email.addEventListener("focus", () => {
@@ -44,8 +41,6 @@ pass.addEventListener("keyup", delay(validatePass, 300));
 pass.addEventListener("focus", passFocusEvent);
 pass.addEventListener("blur", passBlurEvent);
 showPassEye.addEventListener("click", showPass);
-// When the user press the eye, the informations don't disappear
-passDivContainer.addEventListener("click", passFocusEvent);
 
 passConf.addEventListener("keyup", delay(validateConfPass, 300));
 passConf.addEventListener("focus", () => {
@@ -70,8 +65,10 @@ function delay(callback, ms) {
 function validateName() {
   if (name.value === "") {
     checkEmpty(name, errorName);
+    wrongValidation(name, errorName);
   } else {
     inputFull(name, errorName);
+    correctValidation(name, errorName);
   }
 }
 
@@ -110,7 +107,6 @@ function validatePass() {
   inputFull(pass, errorPass);
   const regexpPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(pass.value);
 
-  //Change color and symbol ✓/🗴
   if (!regexpPass) {
     wrongValidation(pass, errorPass);
     checkPass();
@@ -141,23 +137,28 @@ function validateConfPass() {
 }
 
 function btnChecker(e) {
-  e.preventDefault();
-
   checkEmpty(name, errorName);
   checkEmpty(email, errorEmail);
   checkEmpty(pass, errorPass);
   checkEmpty(passConf, errorPassConf);
 
-  /*
-  FIXME:
-  Altre cose da fare??
-  Se è tutto completato invia il form e basta(?);
-  Tanto per la validazione dei singoli input la si farà mentre si scrive
-  */
+  const nameState = finalCheck(name);
+  const emailState = finalCheck(email);
+  const passState = finalCheck(pass);
+  const passConfState = finalCheck(passConf);
+
+  if (!(nameState && emailState && passState && passConfState)) {
+    e.preventDefault();
+    console.log("Error");
+  }
+}
+
+function finalCheck(input) {
+  return input.classList.value === "correct-input";
 }
 
 function wrongValidation(input, error) {
-  let message = changeErrorMessage(input);
+  const message = changeErrorMessage(input);
 
   input.classList.remove("correct-input");
   input.classList.add("wrong-input");
