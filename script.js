@@ -2,6 +2,8 @@
 
 MI SA CHE L'ENTER NON DEVO METTERLO IO, C'è GIà IN AUTOMATICO.
 
+FIXME: fai un check per vedere se tutto funziona anche con schermo grande
+prova anche diversi modi per rompere il tutto
 */
 
 // COMPONENTS

@@ -3,6 +3,7 @@
   --bg-layover: #0000006e;
   --bg-main: #1a1a1a;
   --color-txt: #b9b9b9;
+  --grey-bg: #373737;
   --main-color: #e6007e;
   --wrong-input: #ff4c4c;
   --correct-input: #95ff8d;
@@ -32,7 +33,6 @@ input {
 a {
   color: var(--main-color);
   font-weight: bold;
-
   text-decoration: none;
 }
 
@@ -45,9 +45,12 @@ body {
 }
 
 /*-- HEADER --*/
-h1,
-.img-credit {
+.img-bg {
   color: var(--color-header);
+}
+
+h1 {
+  font-size: 2.5rem;
 }
 
 .fa-wpexplorer {
@@ -55,11 +58,28 @@ h1,
   font-size: 4rem;
 }
 
+.img-credit p {
+  font-size: 0.8rem;
+}
+
 /*-- MAIN --*/
 main,
 footer,
 input {
   color: var(--color-txt);
+}
+
+.paragraphs {
+  font-size: 0.95rem;
+}
+
+form > h3 {
+  font-size: 1.8rem;
+}
+
+.information {
+  font-size: 0.9rem;
+  opacity: 0.95;
 }
 
 input {
@@ -99,6 +119,15 @@ input {
   font-weight: bold;
 }
 
+/*-- FOOTER --*/
+footer {
+  text-align: center;
+}
+
+.fa-github {
+  font-size: 1.4rem;
+}
+
 /*==========
   SPECIFIC
 ==========*/
@@ -122,7 +151,8 @@ input {
 
 .img-credit {
   text-align: center;
-  padding-block: 1rem;
+  margin-top: 1.4rem;
+  padding-bottom: 0.8rem;
 }
 
 .img-credit p {
@@ -134,14 +164,16 @@ input {
 
 /*-- MAIN --*/
 main {
-  /*TODO: Rimuovi il padding nella mediaquery(?)*/
-  padding: 0.6rem;
   text-align: center;
 }
 
+.padding-x {
+  padding: 0.6rem;
+}
+
 .paragraphs {
-  /* TODO: occhio al margin top nella media query */
-  margin-top: 1rem;
+  padding-top: 1rem;
+  background-color: var(--grey-bg);
 }
 
 .paragraphs p + p {
@@ -150,12 +182,10 @@ main {
 
 /*-- FORM --*/
 form {
-  /* TODO: Occhio al margin in media query */
-  margin-top: 2.4rem;
+  margin-top: 1.2rem;
 }
 
 .information {
-  /* TODO: occhio media */
   margin-top: 0.4rem;
   margin-bottom: 2rem;
 }
@@ -175,7 +205,6 @@ input {
 
 input:focus {
   outline: none;
-  /* FIXME: cambierà col javascript in base a se è corretto o meno */
   border-color: var(--main-color);
 }
 
@@ -189,8 +218,6 @@ input:focus {
 
 .input-field {
   margin-bottom: 1rem;
-  /* display: flex;
-  flex-direction: column; */
 }
 
 .error {
@@ -214,6 +241,17 @@ input:focus {
 }
 
 /*-- Show Password --*/
+.show-pass {
+  position: relative;
+  display: inline-block;
+}
+
+.fa-eye {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  right: 5px;
+}
 /*FIXME: aggiustalo quando metti le quary e quindi verso la fine
 altrimenti è probabile che dovrò cambiarlo troppe volte*/
 /*
@@ -248,12 +286,26 @@ altrimenti è probabile che dovrò cambiarlo troppe volte*/
   transform: scale(1.03);
 }
 
-/* #submit:focus {
-  outline: none;
-} */
+.log-in {
+  padding-bottom: 0.8rem;
+}
 
 /*-- FOOTER --*/
+footer {
+  background-color: var(--grey-bg);
+  padding-block: 1rem;
+}
+
+.fa-github {
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+/*FIXME: METTI ANIMAZIONI AL LOGO*/
+
 /* footer {
+  TODO: occhio che deve stare sempre attaccato al basso, quindi occhio all'altezza
+  
   margin auto ?
   flexbox?
   cosa dovrà succedere?
@@ -266,4 +318,69 @@ altrimenti è probabile che dovrò cambiarlo troppe volte*/
 /*==============
   MEDIA QUERIES
 ==============*/
-/*una media a 650+ px (?)*/
+/*-- TABLET --*/
+@media screen and (min-width: 500px) {
+  h1 {
+    font-size: 3.4rem;
+  }
+
+  .paragraphs {
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .paragraphs > p:nth-child(2) {
+    max-width: 48ch;
+  }
+
+  form > h3 {
+    font-size: 2.3rem;
+  }
+
+  .information {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  .error {
+    font-size: 1.1rem;
+  }
+
+  .pass-condition {
+    font-size: 1rem;
+  }
+
+  #submit {
+    padding: 1rem 2.4rem;
+    font-size: 1.5rem;
+  }
+
+  .log-in {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (min-width: 582px) {
+  .all-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .all-inputs > div:nth-child(even) {
+    margin-left: 2rem;
+  }
+
+  input {
+    min-width: 265px;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 842px) {
+}

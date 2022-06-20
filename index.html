@@ -38,98 +38,108 @@
       </div>
     </section>
 
-    <main>
-      <section class="paragraphs">
-        <p>This is <strong>not</strong> a real online service!</p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo excepturi
-          commodi doloribus ducimus nobis odio natus eius quas itaque!
-        </p>
-        <p>Sign up <em>now</em> to get started</p>
-      </section>
+    <div class="rigth-section">
+      <main>
+        <section class="paragraphs padding-x">
+          <p>This is <strong>not</strong> a real online service!</p>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo excepturi
+            commodi doloribus ducimus nobis odio natus eius quas itaque!
+          </p>
+          <p>Sign up <em>now</em> to get started</p>
+        </section>
 
-      <!-- FORM -->
-      <form action="#" method="post">
-        <h3>Join or Create an account!</h3>
-        <p class="information">
-          Field marked with an asterisk (<span class="asterisk">*</span>) are
-          <span class="bold-txt">required</span>.
-        </p>
+        <!-- FORM -->
+        <form action="#" method="post" class="padding-x">
+          <h3>Join or Create an account!</h3>
+          <p class="information">
+            Field marked with an asterisk (<span class="asterisk">*</span>) are
+            <span class="bold-txt">required</span>.
+          </p>
 
-        <!-- FIRST NAME -->
-        <div class="input-field">
-          <label for="first-name" class="required">First Name</label>
-          <input type="text" id="first-name" name="first-name" required />
-          <div class="error" id="name-error"></div>
-        </div>
+          <div class="all-inputs">
+            <!-- FIRST NAME -->
+            <div class="input-field">
+              <label for="first-name" class="required">First Name</label>
+              <input type="text" id="first-name" name="first-name" required />
+              <div class="error" id="name-error"></div>
+            </div>
 
-        <!-- LAST NAME -->
-        <div class="input-field">
-          <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" />
-          <div class="error"></div>
-        </div>
+            <!-- LAST NAME -->
+            <div class="input-field">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="last-name" />
+              <div class="error"></div>
+            </div>
 
-        <!-- EMAIL -->
-        <div class="input-field">
-          <label for="email" class="required">Email</label>
-          <input type="email" id="email" name="email" required />
-          <div class="error" id="email-error"></div>
-        </div>
+            <!-- EMAIL -->
+            <div class="input-field">
+              <label for="email" class="required">Email</label>
+              <input type="email" id="email" name="email" required />
+              <div class="error" id="email-error"></div>
+            </div>
 
-        <!-- PHONE -->
-        <div class="input-field">
-          <label for="phone-number">Phone Number</label>
-          <input type="tel" id="phone-number" name="phone-number" />
-          <div class="error"></div>
-        </div>
+            <!-- PHONE -->
+            <div class="input-field">
+              <label for="phone-number">Phone Number</label>
+              <input type="tel" id="phone-number" name="phone-number" />
+              <div class="error"></div>
+            </div>
 
-        <!-- PASSWORD -->
-        <div class="input-field">
-          <label for="password" class="required">Password</label>
-          <input type="password" id="password" name="password" minlength="8" required />
-          <!-- <i class="fa-solid fa-eye"></i> -->
-          <!--
-            TODO: per l'icona, prova a metterla come #password::after {content=""}
-            nel css così dovrebbe prendere come riferimento l'input relative
-            se rendiamo l'after absolute, almeno credo.
-          -->
-          <div class="error min-height" id="pass-error"></div>
-          <div class="pass-condition" id="d-none">
-            <p><span class="span-length error">🗴</span> Minimum 8 characters</p>
-            <p><span class="span-lowercase error">🗴</span> 1 lowercase character</p>
-            <p><span class="span-uppercase error">🗴</span> 1 uppercase character</p>
-            <p><span class="span-number error">🗴</span> 1 numeric character</p>
+            <!-- PASSWORD -->
+            <div class="input-field">
+              <label for="password" class="required">Password</label>
+              <div class="show-pass">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  minlength="8"
+                  required
+                />
+                <i class="fa-solid fa-eye"></i>
+              </div>
+
+              <div class="error min-height" id="pass-error"></div>
+              <div class="pass-condition" id="d-none">
+                <p><span class="span-length error">🗴</span> Minimum 8 characters</p>
+                <p><span class="span-lowercase error">🗴</span> 1 lowercase character</p>
+                <p><span class="span-uppercase error">🗴</span> 1 uppercase character</p>
+                <p><span class="span-number error">🗴</span> 1 numeric character</p>
+              </div>
+            </div>
+
+            <!-- CONFIRM PASSWORD TODO: NON BISOGNA INVIARLO-->
+            <div class="input-field">
+              <label for="conf-password" class="required">Confirm Password</label>
+              <div class="show-pass">
+                <input
+                  type="password"
+                  id="conf-password"
+                  name="conf-password"
+                  minlength="8"
+                  required
+                />
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <div class="error" id="conf-pass-error"></div>
+            </div>
           </div>
-        </div>
 
-        <!-- CONFIRM PASSWORD TODO: NON BISOGNA INVIARLO-->
-        <div class="input-field">
-          <label for="conf-password" class="required">Confirm Password</label>
-          <input
-            type="password"
-            id="conf-password"
-            name="conf-password"
-            minlength="8"
-            required
-          />
-          <!-- <i class="fa-solid fa-eye"></i> -->
-          <div class="error" id="conf-pass-error"></div>
-        </div>
+          <button id="submit" type="submit">Create Account</button>
+        </form>
 
-        <button id="submit" type="submit">Create Account</button>
-      </form>
+        <p class="log-in">Already have an account? <a href="#">Log in</a></p>
+      </main>
 
-      <p>Already have an account? <a href="#">Log in</a></p>
-    </main>
-
-    <footer>
-      <p>
-        Copyright &copy; 2022 ArmandoCrn
-        <a href="https://github.com/ArmandoCrn" id="logo">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </p>
-    </footer>
+      <footer>
+        <p>
+          Copyright &copy; 2022 ArmandoCrn
+          <a href="https://github.com/ArmandoCrn" id="logo">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </p>
+      </footer>
+    </div>
   </body>
 </html>
