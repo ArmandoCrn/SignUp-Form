@@ -232,12 +232,12 @@ input:focus {
   min-height: 25px;
 }
 
-#d-none {
-  display: none;
-}
-
 .pass-condition {
   display: inline-block;
+}
+
+.d-none {
+  display: none;
 }
 
 /*-- Show Password --*/
@@ -252,6 +252,7 @@ input:focus {
   transform: translateY(50%);
   right: 5px;
 }
+
 /*FIXME: aggiustalo quando metti le quary e quindi verso la fine
 altrimenti è probabile che dovrò cambiarlo troppe volte*/
 /*

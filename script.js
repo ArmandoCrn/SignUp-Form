@@ -19,9 +19,12 @@ const errorEmail = document.querySelector("#email-error");
 const pass = document.querySelector("#password");
 const errorPass = document.querySelector("#pass-error");
 const passDisplay = document.querySelector(".pass-condition");
+const showPassEye = document.querySelector("#first-eye");
+const passDivContainer = document.querySelector(".show-pass");
 
 const passConf = document.querySelector("#conf-password");
 const errorPassConf = document.querySelector("#conf-pass-error");
+const showPassConfEye = document.querySelector("#second-eye");
 
 // EVENTS
 form.addEventListener("submit", () => console.log("Done")); //non credo serva
@@ -40,14 +43,18 @@ email.addEventListener("blur", () => removeOkSign(errorEmail));
 pass.addEventListener("keyup", delay(validatePass, 300));
 pass.addEventListener("focus", passFocusEvent);
 pass.addEventListener("blur", passBlurEvent);
+showPassEye.addEventListener("click", showPass);
+// When the user press the eye, the informations don't disappear
+passDivContainer.addEventListener("click", passFocusEvent);
 
 passConf.addEventListener("keyup", delay(validateConfPass, 300));
 passConf.addEventListener("focus", () => {
-  if (email.value !== "") {
+  if (passConf.value !== "") {
     validateConfPass();
   }
 });
 passConf.addEventListener("blur", () => removeOkSign(errorPassConf));
+showPassConfEye.addEventListener("click", showPass);
 
 // FUNCTIONS
 //Funzione DELAY presa da stackoverflow:
@@ -79,12 +86,24 @@ function validateEmail() {
   }
 }
 
-function showPass() {
-  //TODO: una delle ultime cose da fare, poicè dovrà essere
-  //pronto già il design finale
-  //usa toggle per cambiare l'attributo type da pass a text
-  // Automatizzalo per farlo funzionare sia per questo field,
-  // che per conf pass, anzichè scrivere due volte la stessa roba
+function showPass(e) {
+  const id = e.target.id;
+
+  if (id === "first-eye") {
+    changeType(pass);
+  }
+
+  if (id === "second-eye") {
+    changeType(passConf);
+  }
+}
+
+function changeType(input) {
+  if (input.type === "password") {
+    input.type = "text";
+  } else {
+    input.type = "password";
+  }
 }
 
 function validatePass() {
@@ -92,7 +111,6 @@ function validatePass() {
   const regexpPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(pass.value);
 
   //Change color and symbol ✓/🗴
-
   if (!regexpPass) {
     wrongValidation(pass, errorPass);
     checkPass();
@@ -131,6 +149,7 @@ function btnChecker(e) {
   checkEmpty(passConf, errorPassConf);
 
   /*
+  FIXME:
   Altre cose da fare??
   Se è tutto completato invia il form e basta(?);
   Tanto per la validazione dei singoli input la si farà mentre si scrive
@@ -206,14 +225,14 @@ function passFocusEvent() {
     validatePass();
   }
   errorPass.classList.remove("min-height");
-  passDisplay.removeAttribute("id");
+  passDisplay.classList.remove("d-none");
 }
 
 function passBlurEvent() {
   if (pass.value !== "") {
     validatePass();
   }
-  passDisplay.id = "d-none";
+  passDisplay.classList.add("d-none");
   errorPass.classList.add("min-height");
   removeOkSign(errorPass);
 }
