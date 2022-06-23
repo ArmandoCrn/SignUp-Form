@@ -116,11 +116,8 @@ function validatePass() {
   }
 
   if (passConf.value !== "") {
-    if (passConf.value !== pass.value) {
-      wrongValidation(passConf, errorPassConf);
-    } else {
-      correctValidation(passConf, errorPassConf);
-    }
+    validateConfPass();
+    removeOkSign(errorPassConf);
   }
 }
 
