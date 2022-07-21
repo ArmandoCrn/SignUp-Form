@@ -110,9 +110,15 @@ function validatePass() {
   if (!regexpPass) {
     wrongValidation(pass, errorPass);
     checkPass();
+    // Provo a non far chiudere ed aprire in continuazione i suggerimenti per la pass
+    errorPass.classList.remove("min-height");
+    passDisplay.classList.remove("d-none");
   } else {
     correctValidation(pass, errorPass);
     checkPass();
+    // Provo a non far chiudere ed aprire in continuazione i suggerimenti per la pass
+    passDisplay.classList.add("d-none");
+    errorPass.classList.add("min-height");
   }
 
   if (passConf.value !== "") {
@@ -229,9 +235,13 @@ function passFocusEvent() {
 function passBlurEvent() {
   if (pass.value !== "") {
     validatePass();
+  } else {
+    // Va a chiudersi al blur event SOLO se l'input è vuoto, altrimenti crea scompiglio con i
+    // suggerimenti della pass che si aprono e chiudono in continuazione se si vuol visualizzare la pass
+    // premendo l'occhio per mostrare la pass
+    passDisplay.classList.add("d-none");
+    errorPass.classList.add("min-height");
   }
-  passDisplay.classList.add("d-none");
-  errorPass.classList.add("min-height");
   removeOkSign(errorPass);
 }
 
